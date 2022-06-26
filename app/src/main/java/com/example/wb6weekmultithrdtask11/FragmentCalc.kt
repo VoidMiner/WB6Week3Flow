@@ -1,4 +1,4 @@
-package com.example.MultiThreadTask1.presentation
+package com.example.wb6weekmultithrdtask11
 
 
 import android.os.Bundle
@@ -7,10 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.wb6weekmultithrdtask11.databinding.FragmentCalculationBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
 
 
-class Fragment1 : Fragment() {
+class FragmentCalc : Fragment() {
     private lateinit var binding: FragmentCalculationBinding
     private val const: Double = 4.0
     private var x: Int = 1
@@ -28,7 +31,7 @@ class Fragment1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Thread {// рассчет числа пи жесточайщий (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+        CoroutineScope(Dispatchers.Default).launch {// рассчет числа пи жесточайщий (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
             while (true) {
                 if (count % 2 == 0.toLong()) {
                     y -= BigDecimal(const).divide(BigDecimal(x + 2), 300, 3)
@@ -45,12 +48,12 @@ class Fragment1 : Fragment() {
                 }
                 count++
             }
-        }.start()
+        }
     }
 
     companion object {
 
         @JvmStatic
-        fun newInstance() = Fragment1()
+        fun newInstance() = FragmentCalc()
     }
 }

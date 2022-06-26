@@ -1,18 +1,19 @@
-package com.example.MultiThreadTask1.presentation
+package com.example.wb6weekmultithrdtask11
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Chronometer.OnChronometerTickListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.wb6weekmultithrdtask11.databinding.FragmentTimerBinding
 import java.util.*
 
 
-class Fragment2 : Fragment() {
+class FragmentTimer : Fragment() {
+
+    private val viewModel: MainViewModel by viewModels()
     lateinit var binding: FragmentTimerBinding
 
     override fun onCreateView(
@@ -25,36 +26,27 @@ class Fragment2 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.watch.format = "Time: %s"
-        binding.watch.base = SystemClock.elapsedRealtime()
         val rnd = Random()
+
         val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-        binding.watch.onChronometerTickListener = OnChronometerTickListener { chronometer ->
-            if (SystemClock.elapsedRealtime() - chronometer.base >= 20000) {
+
+        viewModel.timeLiveData.observe(viewLifecycleOwner) {
+            binding.time.text = "Time $it"
+            if (it % 20 == 0) {
                 binding.notificationBackground.setBackgroundColor(color)
             }
         }
+
         binding.apply {
-            playTimer.setOnClickListener { watch.start() }
-            pauseTimer.setOnClickListener { watch.stop() }
-            resetTimer.setOnClickListener { watch.base = SystemClock.elapsedRealtime() }
+            playTimer.setOnClickListener { viewModel.startTimer() }
+            pauseTimer.setOnClickListener { viewModel.stopTimer() }
+            resetTimer.setOnClickListener { viewModel.resetTimer() }
         }
     }
-
-    override fun onStart() {
-        super.onStart()
-        binding.watch.start()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        binding.watch.stop()
-    }
-
 
     companion object {
 
         @JvmStatic
-        fun newInstance() = Fragment2()
+        fun newInstance() = FragmentTimer()
     }
 }

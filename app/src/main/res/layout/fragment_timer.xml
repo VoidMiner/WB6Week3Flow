@@ -4,44 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/notification_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="bottom">
+    android:layout_height="match_parent">
 
 
     <Button
         android:id="@+id/playTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/Play_button"
-        app:layout_constraintStart_toStartOf="@+id/watch"
-        app:layout_constraintTop_toTopOf="@+id/pauseTimer" />
+        app:layout_constraintEnd_toStartOf="@+id/pauseTimer"
+        app:layout_constraintTop_toBottomOf="@+id/time" />
 
     <Button
         android:id="@+id/pauseTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/Pause_button"
-        app:layout_constraintEnd_toStartOf="@+id/resetTimer"
-        app:layout_constraintStart_toEndOf="@+id/playTimer"
-        app:layout_constraintTop_toBottomOf="@+id/watch" />
+        app:layout_constraintBottom_toBottomOf="@+id/playTimer"
+        app:layout_constraintEnd_toEndOf="@+id/time"
+        app:layout_constraintStart_toStartOf="@+id/time"
+        app:layout_constraintTop_toTopOf="@+id/playTimer" />
 
     <Button
         android:id="@+id/resetTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:text="@string/Reset_button"
-        app:layout_constraintEnd_toEndOf="@+id/watch"
-        app:layout_constraintTop_toTopOf="@+id/pauseTimer" />
+        app:layout_constraintBottom_toBottomOf="@+id/pauseTimer"
+        app:layout_constraintStart_toEndOf="@+id/pauseTimer"
+        app:layout_constraintTop_toTopOf="@+id/pauseTimer"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <Chronometer
-        android:id="@+id/watch"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_margin="10dp"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/black"
+        android:text="00:00"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
