@@ -18,7 +18,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction().replace(R.id.place_holder_time, FragmentTimer.newInstance())
             .commit()
-
     }
-
 }

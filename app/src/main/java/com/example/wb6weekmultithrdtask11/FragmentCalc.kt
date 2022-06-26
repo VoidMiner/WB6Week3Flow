@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.wb6weekmultithrdtask11.databinding.FragmentCalculationBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +32,7 @@ class FragmentCalc : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        CoroutineScope(Dispatchers.Default).launch {// рассчет числа пи жесточайщий (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
+        lifecycleScope.launch(Dispatchers.Default) {// рассчет числа пи жесточайщий (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
             while (true) {
                 if (count % 2 == 0.toLong()) {
                     y -= BigDecimal(const).divide(BigDecimal(x + 2), 300, 3)
@@ -44,7 +45,6 @@ class FragmentCalc : Fragment() {
                 }
                 if (x % 50000 == 1) {
                     binding.tvCalc.text = z.substring(0, 300)
-
                 }
                 count++
             }
